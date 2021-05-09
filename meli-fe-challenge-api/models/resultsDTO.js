@@ -6,15 +6,15 @@ class ResultsDTO {
   categories;
   items;
 
+  constructor() {
+    this.author = new Author('Manuel', 'Fabri');
+  }
+
   static fromMeliResults(meliResults) {
+    const relevantMeliResults = meliResults.results.slice(0, 4);
     const mappedDTO = new ResultsDTO();
-    mappedDTO.author = new Author('Manuel', 'Fabri');
-    mappedDTO.categories = [
-      ...new Set(meliResults.results.map((item) => item.category_id)),
-    ]; // @TODO: Validar si esperaban esto, xq no hay otra cat.
-    mappedDTO.items = meliResults.results.map((item) =>
-      ResultItemDTO.fromMeliResultItem(item)
-    );
+    mappedDTO.categories = [...new Set(relevantMeliResults.map((item) => item.category_id))]; // @TODO: Validar si esperaban esto, xq no hay otra cat.
+    mappedDTO.items = relevantMeliResults.map((item) => ResultItemDTO.fromMeliResultItem(item));
     return mappedDTO;
   }
 }

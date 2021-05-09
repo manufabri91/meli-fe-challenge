@@ -14,6 +14,7 @@
     display: none;
     &__logo {
       height: 90%;
+      width: auto;
     }
   }
   .input-container {
@@ -21,13 +22,13 @@
     justify-content: flex-end;
     align-items: center;
     width: inherit;
+    &__search-icon {
+      height: 70%;
+      width: auto;
+    }
     .form-control {
       font-size: 18px;
     }
-  }
-  &__logo {
-    height: 90%;
-    padding-right: 8px;
   }
 }
 

@@ -6,10 +6,8 @@ const Breadcrumb = ({ data }) => {
     <>
       <ol className='breadcrumb'>
         {data.map((item) => (
-          <li className='breadcrumb-item'>
-            <a href={item.permalink} key={item.id}>
-              {item.name}
-            </a>
+          <li className='breadcrumb-item' key={item.id}>
+            <a href={item.permalink}>{item.name}</a>
           </li>
         ))}
       </ol>

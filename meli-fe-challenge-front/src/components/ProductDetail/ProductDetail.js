@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import useFetch from '../../services/useFetch';
+import priceFormatter from '../../helpers/priceFormatter';
+import useFetch from '../../helpers/useFetch';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import './ProductDetail.scss';
 
@@ -30,11 +31,7 @@ const ProductDetail = () => {
         </div>
         <div className='row justify-content-center'>
           <div className='col-sm-12 col-md-7 product-image-container'>
-            <img
-              className='product-image'
-              src={itemDetails.picture}
-              alt={`Foto del Producto ${itemDetails.title}`}
-            />
+            <img className='product-image' src={itemDetails.picture} alt={`Foto del Producto ${itemDetails.title}`} />
           </div>
           <div className='col-sm-12 col-md-3 product-info'>
             <span className='product-state'>
@@ -42,15 +39,8 @@ const ProductDetail = () => {
               {` - ${itemDetails.sold_quantity} vendidos`}
             </span>
             <span className='product-title'>{itemDetails.title}</span>
-            <span className='product-price'>
-              {itemDetails.price.currency === 'ARS'
-                ? '$'
-                : itemDetails.price.currency}
-              {`${itemDetails.price.amount.toLocaleString()}`}
-            </span>
-            <button className='btn btn-primary product-purchase-action'>
-              Comprar
-            </button>
+            <span className='product-price'>{priceFormatter(itemDetails.price)}</span>
+            <button className='btn btn-primary product-purchase-action'>Comprar</button>
           </div>
         </div>
         <div className='row justify-content-center'>

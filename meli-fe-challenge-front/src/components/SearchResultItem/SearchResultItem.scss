@@ -1,0 +1,70 @@
+@import '../../assets/styles/variables';
+
+.search-result-item {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: 2rem 0;
+  .product-image {
+    border-radius: 4px;
+  }
+  .product-data {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    .price-and-shipping {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      color: $meliBlack;
+      font-size: 18px;
+      .shipping-icon {
+        height: 1rem;
+        width: 1rem;
+        margin-left: 0.5rem;
+      }
+      .price {
+        display: flex;
+        align-items: center;
+      }
+    }
+    .title {
+      color: $meliBlack;
+      font-size: 14px;
+      width: 50%;
+    }
+  }
+  .seller-info {
+    font-size: 12px;
+    color: $meliGrey;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-result-item {
+    margin: 16px 0;
+    justify-content: flex-start;
+    .product-image {
+      margin: 0 16px;
+      height: 180px;
+      width: 180px;
+      object-fit: contain;
+      object-position: center;
+    }
+    .product-data {
+      .price-and-shipping {
+        font-size: 24px;
+        padding-bottom: 32px;
+
+        .shipping-icon {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
+      .title {
+        font-size: 18px;
+      }
+    }
+  }
+}

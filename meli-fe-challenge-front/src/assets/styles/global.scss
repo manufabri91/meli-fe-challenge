@@ -22,18 +22,9 @@
   border-color: $meliBlue;
 }
 
-@media screen and (min-width: 768px) {
-  .product-image {
-    border-radius: 4px;
-    &--listing {
-      margin: 16px;
-      height: 180px;
-      width: 180px;
-    }
-    &--details {
-      margin: 16px;
-      height: 680px;
-      width: 680px;
-    }
+.clickeable {
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 }

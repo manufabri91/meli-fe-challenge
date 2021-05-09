@@ -8,6 +8,13 @@ dotenv.config();
 
 const router = express.Router();
 const meliUrl = process.env.MELI_API_URL;
+const handleError = (err, res) => {
+  if (err.response.status === 404) {
+    res.status(404).send(err);
+  } else {
+    res.status(424).send(err);
+  }
+};
 
 router.route('/').get((req, res, next) => {
   const queryParams = req.query;
@@ -16,7 +23,7 @@ router.route('/').get((req, res, next) => {
       params: { ...queryParams },
     })
     .then((response) => res.json(ResultsDTO.fromMeliResults(response.data)))
-    .catch((err) => res.status(424).send(err));
+    .catch((err) => handleError(err, res));
 });
 
 router.route('/:id').get((req, res, next) => {
@@ -27,22 +34,11 @@ router.route('/:id').get((req, res, next) => {
   const getItemInformation = () => axios.get(itemUrl);
   const getItemDescription = () => axios.get(itemDescriptionUrl);
   const getItemBreadcrumbUrl = () => axios.get(itemBreadcrumbUrl);
-  Promise.all([
-    getItemInformation(),
-    getItemDescription(),
-    getItemBreadcrumbUrl(),
-  ])
-    .then(
-      ([itemInfoResponse, itemDescriptionResponse, itemBreadcrumbResponse]) =>
-        res.json(
-          ItemDetailDTO.fromMeliResponses(
-            itemInfoResponse.data,
-            itemDescriptionResponse.data,
-            itemBreadcrumbResponse.data
-          )
-        )
+  Promise.all([getItemInformation(), getItemDescription(), getItemBreadcrumbUrl()])
+    .then(([itemInfoResponse, itemDescriptionResponse, itemBreadcrumbResponse]) =>
+      res.json(ItemDetailDTO.fromMeliResponses(itemInfoResponse.data, itemDescriptionResponse.data, itemBreadcrumbResponse.data))
     )
-    .catch((err) => res.status(424).send(err));
+    .catch((err) => handleError(err, res));
 });
 
 export default router;
