@@ -1,0 +1,21 @@
+@import '../../assets/styles/variables';
+
+.breadcrumb {
+  margin: 16px 0;
+  a {
+    color: $meliGrey;
+    text-decoration: none;
+  }
+  .breadcrumb-item {
+    & + ::before {
+      content: ' > ';
+      color: $meliGrey;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .breadcrumb {
+    display: none;
+  }
+}

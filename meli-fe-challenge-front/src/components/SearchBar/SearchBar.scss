@@ -1,0 +1,43 @@
+@import '../../assets/styles/variables';
+
+.search-bar {
+  background-color: $meliYellow;
+  height: 3rem;
+  align-items: center;
+  .row {
+    height: 100%;
+  }
+  &__elements {
+    display: flex;
+  }
+  .logo-container {
+    display: none;
+    &__logo {
+      height: 90%;
+    }
+  }
+  .input-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: inherit;
+    .form-control {
+      font-size: 18px;
+    }
+  }
+  &__logo {
+    height: 90%;
+    padding-right: 8px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-bar {
+    .logo-container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding-right: 0.4rem;
+    }
+  }
+}

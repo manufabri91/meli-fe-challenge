@@ -9,9 +9,10 @@ class ItemDetailDTO {
     this.author = new Author('Manuel', 'Fabri');
   }
 
-  static fromMeliItemDetailAndDescription(
+  static fromMeliResponses(
     meliDetailResponse,
-    meliDescriptionResponse
+    meliDescriptionResponse,
+    meliBreadcrumbResponse
   ) {
     const mappedDTO = new ItemDetailDTO();
     mappedDTO.item = {
@@ -24,6 +25,8 @@ class ItemDetailDTO {
       picture: meliDetailResponse.pictures[0].url,
       condition: meliDetailResponse.condition,
       free_shipping: meliDetailResponse.shipping.free_shipping,
+      sold_quantity: meliDetailResponse.sold_quantity,
+      bredcrumb_path_data: meliBreadcrumbResponse,
     };
     mappedDTO.item.description = meliDescriptionResponse.plain_text;
     return mappedDTO;

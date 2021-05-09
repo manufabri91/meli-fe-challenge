@@ -1,0 +1,39 @@
+@import 'variables';
+
+.input-group-sm {
+  .btn,
+  input {
+    background-color: white;
+    border: none;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .btn-outline-secondary {
+    color: $meliBlack;
+    &:hover {
+      color: $meliGrey;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: $meliBlue;
+  border-color: $meliBlue;
+}
+
+@media screen and (min-width: 768px) {
+  .product-image {
+    border-radius: 4px;
+    &--listing {
+      margin: 16px;
+      height: 180px;
+      width: 180px;
+    }
+    &--details {
+      margin: 16px;
+      height: 680px;
+      width: 680px;
+    }
+  }
+}

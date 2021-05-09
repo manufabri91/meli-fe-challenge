@@ -23,16 +23,24 @@ router.route('/:id').get((req, res, next) => {
   const id = req.params.id;
   const itemUrl = `${meliUrl}/items/${id}`;
   const itemDescriptionUrl = `${meliUrl}/items/${id}/description`;
+  const itemBreadcrumbUrl = `${meliUrl}/items/${id}/breadcrumb`;
   const getItemInformation = () => axios.get(itemUrl);
   const getItemDescription = () => axios.get(itemDescriptionUrl);
-  Promise.all([getItemInformation(), getItemDescription()])
-    .then(([itemInfoResponse, itemDescriptionResponse]) =>
-      res.json(
-        ItemDetailDTO.fromMeliItemDetailAndDescription(
-          itemInfoResponse.data,
-          itemDescriptionResponse.data
+  const getItemBreadcrumbUrl = () => axios.get(itemBreadcrumbUrl);
+  Promise.all([
+    getItemInformation(),
+    getItemDescription(),
+    getItemBreadcrumbUrl(),
+  ])
+    .then(
+      ([itemInfoResponse, itemDescriptionResponse, itemBreadcrumbResponse]) =>
+        res.json(
+          ItemDetailDTO.fromMeliResponses(
+            itemInfoResponse.data,
+            itemDescriptionResponse.data,
+            itemBreadcrumbResponse.data
+          )
         )
-      )
     )
     .catch((err) => res.status(424).send(err));
 });
